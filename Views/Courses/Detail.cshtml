@@ -1,0 +1,74 @@
+﻿@model CourseDetailViewModel
+@{
+    ViewData["Title"] = $"Corso {Model.Id}";
+}
+
+<section class="course-info">
+    <div class="row">
+        <div class="col-md-9">
+            <h1>@Model.Title</h1>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <a href="#" class="btn-primary btn-warning ">Iscriviti</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <p>@Model.Description</p>
+            <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  </p>
+            <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        
+        </div>
+        <div class="col-md-3">
+            <aside>
+                <author>di @Model.Author</author>
+                <div class="rating">
+                    @for(int i =1; i<= 5; i++)
+                    {
+                        if(Model.Rating >= i)
+                        {
+                            <i class="fa-solid fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-regular fa-star"></i>    
+                        }
+                    }
+                </div>
+                <div class="price">@Model.CurrentPrice<br />
+                    @if (!Model.FullPrice.Equals(Model.CurrentPrice))
+                    {
+                        <s>Model.FullPrice</s>
+                    }
+                </div>
+                <img src="@Model.ImagePath" class="img-fluid" />
+            </aside>
+        </div>
+    </div>
+</section>
+
+<section class="course-lessons">   
+    <h2>Lezioni (@Model.Lessons.Count)</h2>
+    @foreach(LessonViewModel lesson in Model.Lessons)
+    {
+        <hr />
+        <div class="row">
+            <div class="col-md-9 d-flex align-items-center">
+                <a href="#">@lesson.Title</a>
+            </div>
+            <div class="col-md-3 d-flkex align-items-center">
+                <i class="fa-solid fa-clock"></i><time>@lesson.Duration.ToString("m'm 's's'")</time>
+            </div>
+        </div>
+    }
+    <hr />
+    <div class="row course-duration">
+        <div class="col-md-9 d-flex align-items-center"> 
+            Totale
+        </div>
+        <div class="col-md-3 d-flex align-items-center">
+            <i class="fa-solid fa-clock"></i><time>@Model.TotalCourseDuration.ToString("m'm 's's'")</time>
+        </div>
+    </div>
+</section>

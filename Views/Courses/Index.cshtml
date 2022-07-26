@@ -1,30 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<CourseViewModel>
+@{
+    ViewData["Title"] = "Elenco dei corsi";
+}
 <h1>Catalogo dei corsi</h1>
-
 <div class="row pt-2">
-    @for(int i = 1; i<= 5; i++)
+    @foreach(CourseViewModel course in Model)
     {
         <div class="col-3 col-md-1">
-            <img src=~/img/logo.svg class="img-fluid" height="20px"/> 
+            <img src="@course.ImagePath" class="img-fluid" height="20px"/> 
         </div>
         <div class="col-md-5">
-            <h2>Titolo del corso</h2>
-            <author>di Nome Autore</author>
+            <h2>@course.Title</h2>
+            <author>di @course.Author</author>
+        </div>
+        <div class="col-md-2" title="@course.Rating">
+            @for(int i =1; i<= 5; i++)
+            {
+                if(course.Rating >= i)
+                {
+                    <i class="fa-solid fa-star"></i>
+                }
+                else
+                {
+                    <i class="fa-regular fa-star"></i>    
+                }
+            }
         </div>
         <div class="col-md-2">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
+            @course.CurrentPrice<br />
+            @if(!course.CurrentPrice.Equals(course.FullPrice))
+            {
+                <s>@course.FullPrice</s>
+            }
         </div>
         <div class="col-md-2">
-            EUR 10,99 <br /><s>EUR 12,99</s>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-outline-primary" asp-action="Detail" asp-route-id="5">Dettaglio Corso @i</a>
+            <a class="btn btn-outline-primary" asp-action="Detail" asp-route-id="@course.Id">Dettaglio Corso @course.Id</a>
         </div>
     }
 </div>

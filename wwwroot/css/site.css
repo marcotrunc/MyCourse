@@ -16,3 +16,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.rating{
+    color: orange;
+    white-space : nowrap;
+}
+
+.price s{
+    color:#aaa;
+    font-size: 0.8em;
+}
+
+footer {
+    margin-top: 3em;
+    padding-top: 1em;
+    border-top: 1px solid #ccc;
+    padding-bottom:2em;
+    text-align: center;
+    color: grey;
+}
