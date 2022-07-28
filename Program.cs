@@ -1,8 +1,13 @@
+using MyCourse.Models.Services.Application;
+using MyCourse.Models.Services.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+//Added for Dependency Injection
+builder.Services.AddScoped<ICourseService, AdoNetCourseService>();
+builder.Services.AddTransient<IDatabaseAccessor, SqlServerDatabaseAccessor>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
